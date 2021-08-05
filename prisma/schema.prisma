@@ -9,3 +9,27 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+// Pizza Type Model
+model Pizza {
+  id        String      @id @default(cuid())
+  name      String
+  price     Int
+  OrderItem OrderItem[]
+}
+
+// Individual Order Item
+model OrderItem {
+  id       String     @id @default(cuid())
+  quantity Int
+  pizza    Pizza      @relation(fields: [pizzaId], references: [id])
+  pizzaId  String
+  order    OrderList[]
+}
+
+// List of all orders
+model OrderList {
+  id      String    @id @default(cuid())
+  order   OrderItem @relation(fields: [orderId], references: [id])
+  orderId String
+}
