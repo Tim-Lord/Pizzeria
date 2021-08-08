@@ -18,7 +18,6 @@ router.get('/pizza', async (req, res) => {
 
 router.get('/order/:id', async(req, res) => {
     try {
-        console.log(req.params)
         const order = await prisma.orderItem.findUnique({
             where: {
                 id: req.params.id
@@ -37,10 +36,28 @@ router.get('/order/:id', async(req, res) => {
         console.log(error.message);
         res.status(500);
         res.json({
-            "message": "Server Error, we are fixing it. Try agin later..."
+            "message": "Server Error, we are fixing it. Try again later..."
         })
     }
-})
+});
+
+router.post('/create_order/:id',  async(req, res) => {
+    try {
+        const order = await prisma.orderItem.create({
+            data: {
+                pizzaId: req.params.id,
+                quantity: parseInt(req.body.quantity)
+            }
+        });
+        res.json(order);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500);
+        res.json({
+            "message": "Server Error, we are fixing it. Try again later... "
+        });
+    }
+});
 
 
 module.exports = router
