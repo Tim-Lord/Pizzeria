@@ -63,7 +63,7 @@ router.get('/order/:id', async(req, res) => {
     }
 });
 
-router.post('/create_order/:id',  async(req, res) => {
+router.post('/order/:id',  async(req, res) => {
     try {
         const order = await prisma.orderItem.create({
             data: {
