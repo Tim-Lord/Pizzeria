@@ -16,6 +16,19 @@ router.get('/pizza', async (req, res) => {
     }
 });
 
+router.get('/orders', async (req, res) => {
+    try {
+        const orders = await prisma.orderItem.findMany();
+        res.json(orders)
+    } catch (error) {
+        console.log(error.message);
+        res.status(500);
+        res.json({
+            "message": "Server Error, we are fixing it. Try again later..."
+        })
+    }
+})
+
 router.get('/order/:id', async(req, res) => {
     try {
         const order = await prisma.orderItem.findUnique({
