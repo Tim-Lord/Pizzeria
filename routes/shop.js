@@ -18,7 +18,16 @@ router.get('/pizza', async (req, res) => {
 
 router.get('/orders', async (req, res) => {
     try {
-        const orders = await prisma.orderItem.findMany();
+        const orders = await prisma.orderItem.findMany({
+            include: {
+                pizza: {
+                    select: {
+                        name: true,
+                        price: true
+                    }
+                }
+            }
+        });
         res.json(orders)
     } catch (error) {
         console.log(error.message);
