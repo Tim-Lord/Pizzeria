@@ -34,13 +34,20 @@ const PizzaProvider = ({children}) => {
         }
     }
 
-    // const createOrder = async () => {
-    //     try {
-            
-    //     } catch (error) {
-            
-    //     }
-    // }
+    const createOrder = async (pizza) => {
+        const {id, quantity} = pizza;
+        const config = {
+            headers: {
+                "Content-Type": "Application/json"
+            }
+        }
+        try {
+            const res = await axios.post(`/pizzeria/order/${id}`, quantity, config);
+            console.log(res.data)
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     useEffect(() => {
         fetchPizza();
@@ -50,6 +57,7 @@ const PizzaProvider = ({children}) => {
         <PizzaContext.Provider
             value= {{
                 pizzaShop: state.pizzaShop,
+                createOrder,
                 loading: state.loading
             }}
         >
