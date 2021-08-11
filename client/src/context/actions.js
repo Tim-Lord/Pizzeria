@@ -1,0 +1,2 @@
+export const FETCH_PIZZA = 'FETCH_PIZZA';
+export const FETCHING_ERROR = 'FETCHING_ERROR';
