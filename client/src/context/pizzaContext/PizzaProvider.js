@@ -24,7 +24,7 @@ const PizzaProvider = ({children}) => {
                 type: FETCH_PIZZA,
                 payload: res.data
             })
-            console.log(res.data)
+            // console.log(res.data)
         } catch (error) {
             console.error(error.message)
             dispatch({
@@ -53,7 +53,7 @@ const PizzaProvider = ({children}) => {
                 loading: state.loading
             }}
         >
-            {children}
+            {!state.loading && children}
         </PizzaContext.Provider>
     )
 }
