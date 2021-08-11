@@ -1,4 +1,4 @@
-import { FETCH_PIZZA, FETCHING_ERROR } from '../actions';
+import { FETCH_PIZZA, ERROR_MESSAGE, LOAD_CART, ORDER_SUCCESS } from '../actions';
 
 const pizzaReducer = (state, action) => {
     switch (action.type) {
@@ -8,9 +8,22 @@ const pizzaReducer = (state, action) => {
                 pizzaShop: action.payload,
                 loading: false
             }
-        case FETCHING_ERROR:
+        case LOAD_CART:
             return {
                 ...state,
+                cart: [...action.payload],
+                loading: false
+            }  
+        case ORDER_SUCCESS:
+            return {
+                ...state,
+                message: action.payload,
+                loading: false
+            }      
+        case ERROR_MESSAGE:
+            return {
+                ...state,
+                error: '',
                 loading: false
             }
         default: 
