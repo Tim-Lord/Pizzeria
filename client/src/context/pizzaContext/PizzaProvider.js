@@ -2,7 +2,7 @@ import React, {createContext, useContext, useReducer, useEffect} from 'react';
 import axios from 'axios';
 
 import {pizzaReducer} from './pizzaReducer';
-import { FETCH_PIZZA, FETCHING_ERROR } from '../actions';
+import { FETCH_PIZZA, ERROR_MESSAGE, SUCCESS_MESSAGE, LOAD_CART } from '../actions';
 
 const PizzaContext = createContext();
 
@@ -12,7 +12,10 @@ const PizzaProvider = ({children}) => {
 
     const initialState = {
         pizzaShop: null,
-        loading: true
+        cart: [],
+        message: '',
+        loading: true,
+        error: ''
     }
 
     const [state, dispatch] = useReducer(pizzaReducer, initialState);
@@ -28,8 +31,8 @@ const PizzaProvider = ({children}) => {
         } catch (error) {
             console.error(error.message)
             dispatch({
-                type: FETCHING_ERROR,
-                payload: "Server Error"
+                type: ERROR_MESSAGE,
+                payload: "Server Error. Try again Later"
             })
         }
     }
@@ -43,10 +46,25 @@ const PizzaProvider = ({children}) => {
         }
         try {
             const res = await axios.post(`/pizzeria/order/${id}`, quantity, config);
-            console.log(res.data)
+            console.log(res.data);
+            dispatch({
+                type: SUCCESS_MESSAGE,
+                payload: "Your order was successfully made..."
+            })
         } catch (error) {
             console.log(error.message);
+            dispatch({
+                type: ERROR_MESSAGE,
+                payload: "There was an en error while submitting your order. Try again later..."
+            })
         }
+    }
+
+    const loadCart = (pizza) => {
+        dispatch({
+            type: LOAD_CART,
+            payload: pizza
+        })
     }
 
     useEffect(() => {
@@ -57,8 +75,12 @@ const PizzaProvider = ({children}) => {
         <PizzaContext.Provider
             value= {{
                 pizzaShop: state.pizzaShop,
-                createOrder,
-                loading: state.loading
+                cart: state.cart,
+                message: state.message,
+                error: state.error,
+                loading: state.loading,
+                loadCart,
+                createOrder
             }}
         >
             {!state.loading && children}
