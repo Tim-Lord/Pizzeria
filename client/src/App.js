@@ -1,7 +1,11 @@
+import React from 'react';
+
 import './App.css';
+
 import PizzaProvider from './context/pizzaContext/PizzaProvider';
 import { Navbar } from './components/Navbar';
 import { PizzaList } from './components/PizzaList';
+import { Cart } from './components/Cart';
 
 function App() {
   return (
@@ -15,7 +19,8 @@ function App() {
             <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
-          <PizzaList />
+              <PizzaList />
+              <Cart />
         </main>
       </PizzaProvider>
      

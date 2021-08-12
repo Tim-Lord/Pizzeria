@@ -39,7 +39,8 @@ const PizzaProvider = ({children}) => {
  
 
     const createOrder = async (pizza) => {
-        const {id, quantity} = pizza;
+        let {id, quantity} = pizza;
+        quantity = parseInt(quantity)
         const config = {
             headers: {
                 "Content-Type": "Application/json"
