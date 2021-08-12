@@ -15,10 +15,10 @@ const Cart = () => {
     }
 
     return (
-        <div style= {{width: "90%", margin: "0 auto"}}>
+        <div style= {{width: "90%", margin: "20px auto"}}>
         {
             cart.length === 0 ? 
-                <h2> Add Pizza to your cart to make an order </h2> :
+                <h2 style= {{borderBottom: "1px solid #873e23"}}> Add Pizza to your cart to make an order </h2> :
                 <table className= "cart">
                     <tr>
                         <th> Pizza </th>
@@ -31,11 +31,12 @@ const Cart = () => {
                     }
                 </table>
         }
-        <div>
+        <div style= {{width: "90%", margin: "18px auto"}}>
             <button
+                className= 'btn'
                 onClick = {handleClick}
             >
-                Make your Order
+                Make Your Order
             </button>
         </div>
         </div>
