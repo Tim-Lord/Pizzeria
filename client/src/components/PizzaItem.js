@@ -1,6 +1,13 @@
-import React from 'react'
+import React from 'react';
+
+import { usePizza } from '../context/pizzaContext/PizzaProvider';
 
 const PizzaItem = ({pizza}) => {
+
+    const { loadCart } = usePizza();
+
+    const handleClick = () => loadCart(pizza);
+
     return (
         <div className= "Card">
             <div className= "card-item-container">
@@ -10,7 +17,12 @@ const PizzaItem = ({pizza}) => {
                 <br />
                 <h3> {pizza.price} </h3>
             </div>
-            <button className= "btn"> Add to cart </button>
+            <button 
+                className= "btn"
+                onClick= {handleClick}
+            > 
+                Add to cart 
+            </button>
         </div>
     )
 }
