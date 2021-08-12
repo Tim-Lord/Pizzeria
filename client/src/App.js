@@ -19,8 +19,8 @@ function App() {
             <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
-              <PizzaList />
-              <Cart />
+            <PizzaList />
+            <Cart />
         </main>
       </PizzaProvider>
      
