@@ -15,7 +15,7 @@ const PizzaItem = ({pizza}) => {
                 <br />
                 <hr />
                 <br />
-                <h3> {pizza.price} </h3>
+                <h3> KSH {pizza.price} </h3>
             </div>
             <button 
                 className= "btn"
