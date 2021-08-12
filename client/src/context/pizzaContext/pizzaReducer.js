@@ -1,4 +1,4 @@
-import { FETCH_PIZZA, ERROR_MESSAGE, LOAD_CART, ORDER_SUCCESS } from '../actions';
+import { FETCH_PIZZA, ERROR_MESSAGE, LOAD_CART } from '../actions';
 
 const pizzaReducer = (state, action) => {
     switch (action.type) {
@@ -11,15 +11,9 @@ const pizzaReducer = (state, action) => {
         case LOAD_CART:
             return {
                 ...state,
-                cart: [...action.payload],
+                cart: [...new Set([...state.cart, action.payload])],
                 loading: false
-            }  
-        case ORDER_SUCCESS:
-            return {
-                ...state,
-                message: action.payload,
-                loading: false
-            }      
+            }        
         case ERROR_MESSAGE:
             return {
                 ...state,

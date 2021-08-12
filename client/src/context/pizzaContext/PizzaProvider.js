@@ -2,7 +2,7 @@ import React, {createContext, useContext, useReducer, useEffect} from 'react';
 import axios from 'axios';
 
 import {pizzaReducer} from './pizzaReducer';
-import { FETCH_PIZZA, ERROR_MESSAGE, SUCCESS_MESSAGE, LOAD_CART } from '../actions';
+import { FETCH_PIZZA, ERROR_MESSAGE, LOAD_CART } from '../actions';
 
 const PizzaContext = createContext();
 
@@ -36,6 +36,7 @@ const PizzaProvider = ({children}) => {
             })
         }
     }
+ 
 
     const createOrder = async (pizza) => {
         const {id, quantity} = pizza;
@@ -47,10 +48,6 @@ const PizzaProvider = ({children}) => {
         try {
             const res = await axios.post(`/pizzeria/order/${id}`, quantity, config);
             console.log(res.data);
-            dispatch({
-                type: SUCCESS_MESSAGE,
-                payload: "Your order was successfully made..."
-            })
         } catch (error) {
             console.log(error.message);
             dispatch({
@@ -80,7 +77,7 @@ const PizzaProvider = ({children}) => {
                 error: state.error,
                 loading: state.loading,
                 loadCart,
-                createOrder
+                createOrder,
             }}
         >
             {!state.loading && children}
